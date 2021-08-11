@@ -22,27 +22,46 @@ var enemyAttack = 12;
 // "LOSE" - Player robot's health is zero or less
 
 // this is to create a function
-var fight = function(enemyName) {
+var startGame = function() {
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
+    for (var i = 0; i < enemyNames.length; i++) {
     if (playerHealth > 0) {
-        // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
         window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
     
-        // pick new enemy to fight based on the index of the enemyNames array
         var pickedEnemyName = enemyNames[i];
     
-        // reset enemyHealth before starting new fight
         enemyHealth = 50;
     
-        // use debugger to pause script from running and check what's going on at that moment in the code
-        // debugger;
-    
-        // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
         fight(pickedEnemyName);
       }
       else {
           window.alert("You have lost your robot in battle! Game Over!");
           break;
       }
+    }
+    startGame();
+
+    var endGame = function() {
+        if (playerHealth > 0) {
+        window.alert("the game has now ended. Lets see how you did!");
+        }
+    else {
+        window.alert("You've lost your robot in battle.");
+    }
+    };
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        //restart the game
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing robot gladiators! Come back soon!");
+    }
+};
     while (playerHealth > 0 && enemyHealth > 0) {
       // ask player if they'd like to fight or run
       var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
@@ -96,7 +115,7 @@ var fight = function(enemyName) {
         window.alert(playerName + ' still has ' + playerHealth + ' health left.');
       }
     }
-  };
+
 
 
 
@@ -114,3 +133,4 @@ for (var i = 0; i < enemyNames.length; i++) {
     enemyHealth = 50;
     fight(enemyNames[i]);
 }
+startGame();
